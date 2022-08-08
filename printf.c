@@ -17,7 +17,7 @@ int _print(const char *format, ...)
 	
 	va_start(ap,format);
 
-	   while(ch = *format ++)
+	   while(ch = *format ++);
 	   {
 		   if ('%' == ch)
 		   {
