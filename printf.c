@@ -28,10 +28,12 @@ int _print(const char *format, ...)
 					   i++;
 					   break;
 				   case 'c':
-					   goto c;
+					   char_temp = va_arg(ap, int);
+					   putchar( char_temp);
+					   i++;
 					   break;
 				   case 's':
-					   goto s;
+					   string_temp = va_arg(ap, );
 					   char * s = va_arg(ap,int);
 					   break;
 	
