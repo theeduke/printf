@@ -10,34 +10,30 @@
 int _print(const char *format, ...)
 {
 	va_list ap;
-
+	char char_temp;
+	char *string_temp;
+	char ch;
 	int i = 0;
+	
 	va_start(ap,format);
-		if (format == NULL)
-		{
-			return 1;
-		}
-		else{
-			while(format[i])
-					putchar(format[i]);
-					i++;
-			}
-	switch(*format)
-	{
-	case 'c':
-		goto c;
 
-		break;
-	case 's':
-
-		goto s;
-		
-		char *s = malloc(sizeof(char));
-		char s = va_arg(ap,int);
-		break;
-	case '%':
-		putchar("%", va_arg, char);
-		break;	
+	   while(ch = *format ++)
+	   {
+		   if ('%' == ch)
+		   {
+			   switch (ch = *format ++)
+			   {
+				   case '%':
+					   putchar('%', char);
+					   i++;
+					   break;
+				   case 'c':
+					   goto c;
+					   break;
+				   case 's':
+					   goto s;
+					   char * s = va_arg(ap,int);
+					   break;
 	
 
 	}
