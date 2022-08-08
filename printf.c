@@ -36,14 +36,9 @@ int _print(const char *format, ...)
 					   string_temp = va_arg(ap, );
 					   char * s = va_arg(ap,int);
 					   break;
-	
-
-	}
-
-
-         char c = va_arg(ap,int);
-                        putchar('c');
-
+			   }
+		   }
+	   }
 	va_end(ap);
 	return (0);
 
