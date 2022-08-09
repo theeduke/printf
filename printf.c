@@ -1,45 +1,76 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-/**
- * _printf - function that produces output according to format
- * *format : number of arguments
- * ... : number of arguments
- */
-int _print(const char *format, ...)
-{
-	va_list ap;
-	char char_temp;
-	char *string_temp;
-	char ch;
-	int i = 0;
-	
-	va_start(ap,format);
 
-	   while(ch = *format ++)
-	   {
-		   if ('%' == ch)
-		   {
-			   switch (ch = *format ++)
-			   {
-				   case '%':
-					   putchar('%', char);
-					   i++;
-					   break;
-				   case 'c':
-					   char_temp = va_arg(ap, int);
-					   putchar( char_temp);
-					   i++;
-					   break;
-				   case 's':
-					   string_temp = va_arg(ap,char *);
-					   char * s = va_arg(ap,int);
-					   break;
-			   }
-		   }
-	   }
-	va_end(ap);
-	return (0);
+#include <limits.h>
+
+#include <stdio.h>
+
+int _printf(const char *format, ...)
+
+{
+
+    int (_pfunc)(va_list, flags_t _);
+
+    const char *i;
+
+    va_list arguments;
+
+    flags_t flags = {0, 0, 0};
+
+    register int count = 0;
+
+    va_start(arguments, format);
+
+    if (!format || (format[0] == '%' && !format[1]))
+
+        return (-1);
+
+    if (format[0] == '%' && format[1] == ' ' && !format[2])
+
+        return (-1);
+
+    for (i = format; *i; i++)
+
+    {
+
+        if (*i == '%')
+
+        {
+
+            i++;
+
+            if (*i == '%')
+
+            {
+
+                count += _putchar('%');
+
+                continue;
+
+            }
+
+            while (get_flag(*i, &flags))
+
+                i++;
+
+            pfunc = get_print(*i);
+
+            count += (pfunc)
+
+                ? pfunc(arguments, &flags)
+
+                : _printf("%%%c", *i);
+
+        } else
+
+            count += _putchar(*i);
+
+    }
+
+    _putchar(-1);
+
+    va_end(arguments);
+
+    return (count);
 
 }
+
