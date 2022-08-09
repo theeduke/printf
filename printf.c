@@ -74,9 +74,7 @@ int _printf(const char *format, ...)
     va_end(arguments);
     
     return (count);
-=======
 	register int count = 0;
->>>>>>> 1539be809ee04b8566576a23ee39d234c08247f0
 
 	va_start(arguments, format);
 	if (!format || (format[0] == '%' && !format[1]))
