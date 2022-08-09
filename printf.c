@@ -33,7 +33,7 @@ int _print(const char *format, ...)
 					   i++;
 					   break;
 				   case 's':
-					   string_temp = va_arg(ap, );
+					   string_temp = va_arg(ap,char *);
 					   char * s = va_arg(ap,int);
 					   break;
 			   }
