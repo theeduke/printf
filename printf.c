@@ -1,91 +1,76 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include<string.h>
-/**
- * _printf - function that produces output according to format
- * *format : number of arguments
- * ... : number of arguments
- */
-int _print(const char *format, ...)
-{
-	va_list ap;
-	char char_temp;
-	char *string_temp;
-	char ch;
-	int i = 0;
-	
-	va_start(ap,format);
 
-	   while(ch = *format ++)
-	   {
-		   if ('%' == ch)
-		   {
-			   switch (ch = *format ++)
-			   {
-				   case '%':
-					   putchar('%', char);
-					   i++;
-					   break;
-				   case 'c':
-					   char_temp = va_arg(ap, int);
-					   putchar( char_temp);
-					   i++;
-					   break;
-				   case 's':
-					   string_temp = va_arg(ap,char * );
-					   char * s = va_arg(ap,int);
-					   i += strlen(string_temp);
-					   break;
-			   }
-		   }
-	   }
-	va_end(ap);
-	return (0);
-
-}
 #include <limits.h>
+
 #include <stdio.h>
-#include "main.h"
 
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
+int _printf(const char *format, ...)
+
 {
-    int len;
-    int len2;
-    unsigned int ui;
-    void *addr;
 
-    len = _printf("Let's try to printf a simple sentence.\n");
-    len2 = printf("Let's try to printf a simple sentence.\n");
-    ui = (unsigned int)INT_MAX + 1024;
-    addr = (void *)0x7ffe637541f0;
-    _printf("Length:[%d, %i]\n", len, len);
-    printf("Length:[%d, %i]\n", len2, len2);
-    _printf("Negative:[%d]\n", -762534);
-    printf("Negative:[%d]\n", -762534);
-    _printf("Unsigned:[%u]\n", ui);
-    printf("Unsigned:[%u]\n", ui);
-    _printf("Unsigned octal:[%o]\n", ui);
-    printf("Unsigned octal:[%o]\n", ui);
-    _printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-    printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-    _printf("Character:[%c]\n", 'H');
-    printf("Character:[%c]\n", 'H');
-    _printf("String:[%s]\n", "I am a string !");
-    printf("String:[%s]\n", "I am a string !");
-    _printf("Address:[%p]\n", addr);
-    printf("Address:[%p]\n", addr);
-    len = _printf("Percent:[%%]\n");
-    len2 = printf("Percent:[%%]\n");
-    _printf("Len:[%d]\n", len);
-    printf("Len:[%d]\n", len2);
-    _printf("Unknown:[%r]\n");
-    printf("Unknown:[%r]\n");
-    return (0);
+    int (_pfunc)(va_list, flags_t _);
+
+    const char *i;
+
+    va_list arguments;
+
+    flags_t flags = {0, 0, 0};
+
+    register int count = 0;
+
+    va_start(arguments, format);
+
+    if (!format || (format[0] == '%' && !format[1]))
+
+        return (-1);
+
+    if (format[0] == '%' && format[1] == ' ' && !format[2])
+
+        return (-1);
+
+    for (i = format; *i; i++)
+
+    {
+
+        if (*i == '%')
+
+        {
+
+            i++;
+
+            if (*i == '%')
+
+            {
+
+                count += _putchar('%');
+
+                continue;
+
+            }
+
+            while (get_flag(*i, &flags))
+
+                i++;
+
+            pfunc = get_print(*i);
+
+            count += (pfunc)
+
+                ? pfunc(arguments, &flags)
+
+                : _printf("%%%c", *i);
+
+        } else
+
+            count += _putchar(*i);
+
+    }
+
+    _putchar(-1);
+
+    va_end(arguments);
+
+    return (count);
+
 }
+
